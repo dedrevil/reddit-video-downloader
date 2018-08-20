@@ -10,7 +10,8 @@ class VideoDownloader extends Component {
             videoUrl: null,
             downloadLink: null,
             urlInputValue: '',
-            downloadButtonText: "⏬ Download ⏬"
+            downloadButtonText: "▼ Download ▼",
+            showExampleUrl : false
         }
     }
 
@@ -49,7 +50,7 @@ class VideoDownloader extends Component {
     checkDownloadButtonText() {
         if (document.querySelector(".btn-download").getAttribute("href") !== null) {
             this.setState({
-                downloadButtonText: "⏬ Download ⏬"
+                downloadButtonText: "▼ Download ▼"
             });
         } else {
             this.setState({
@@ -68,18 +69,29 @@ class VideoDownloader extends Component {
             this.getVideo();
         });
     }
+    toggleExampleUrl() {
+        this.setState({
+            showExampleUrl : !this.state.showExampleUrl
+        })
+    }
 
     render() {
         return (
             <section className="col-md-6 col-sm-12 mx-auto">
                 <form>
                     <div className="form-group">
-                        <input type="text" onChange={this.handleChange.bind(this)} value={this.state.urlInput} className="form-control form-control-lg" placeholder="Paste reddit url here" />
+                        <input type="text" onChange={this.handleChange.bind(this)} value={this.state.urlInput} className="form-control form-control-lg" placeholder="Paste reddit video url here" />
                     </div>
                     <div className="form-group text-center">
                         <a href={this.state.videoUrl} target="_blank" role="button" onClick={this.getVideo.bind(this)} className="btn btn-secondary btn-lg btn-download disabled">{this.state.downloadButtonText}</a>
                     </div>
                 </form>
+                
+                <div className="text-center">
+                    <button type="button" onClick={this.toggleExampleUrl.bind(this)} className="btn btn-outline-secondary btn-sm mt-5">Show an example url</button>
+                    { this.state.showExampleUrl ?               
+                    <p className="text-mute pt-2"  style={{maxWidth:'570px', overflow:'auto'}}>https://www.reddit.com/r/AnimalTextGifs/comments/97yg8s/poor_cat_stuck_in_a_pipe/</p>  : null }
+                </div>
             </section>
         )
     }

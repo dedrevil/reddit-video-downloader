@@ -1,1 +1,1 @@
-# 📹 Reddit Video Downloader 📹
+# ~(˘▾˘~) Reddit Video Downloader
